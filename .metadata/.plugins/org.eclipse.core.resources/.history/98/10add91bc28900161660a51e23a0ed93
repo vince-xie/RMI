@@ -1,0 +1,17 @@
+import java.io.FileInputStream;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDataProto.AirportList;
+
+public class Test {
+
+	public static void main(String[] args) {
+		AirportList al = AirportList.parseFrom(new FileInputStream("airports-proto.bin"));
+		for (Airport a: al.getAirportList()) {
+		System.out.println(
+		"state: " + p.getState() + " " + "name: " + p.getName() + " "
+		+ "code: " + p.getCode() + " " + "lat: " + p.getLat() + " "
+		+ "lon: " + p.getLon());
+		}
+	}
+}
