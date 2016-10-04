@@ -3,8 +3,10 @@ package server;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import PlaceData.PlaceDataProto.PlaceList;
+import remote.Places;
 
 /**
  * @author Vincent Xie, Edmond Wu
