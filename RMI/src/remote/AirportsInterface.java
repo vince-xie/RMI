@@ -4,8 +4,11 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDistance;
 
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
 public interface AirportsInterface extends Remote {
-	public List<Airport> getNearestAirports(double longitude, double latitude) throws RemoteException;
+	public List<AirportDistance> getNearestAirports(double latitude, double longitude) throws RemoteException;
 }

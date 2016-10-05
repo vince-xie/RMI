@@ -1,0 +1,41 @@
+package remote;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import static utils.DistanceCalculator.calculateDistance;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDataProto.AirportList;
+
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
+public class Airports extends UnicastRemoteObject implements AirportsInterface {
+
+	private static final long serialVersionUID = 1L;
+	private AirportList airportList;
+
+	public Airports(AirportList airportList) throws RemoteException {
+		this.airportList = airportList;
+	}
+
+	/**
+	 * Gets a list of the nearest airports to the specified longitude and latitude.
+	 * @param latitude
+	 * @param longitude
+	 * @return List of nearest airports
+	 */
+	public List<Airport> getNearestAirports(double latitude, double longitude) {
+		List<Airport> nearestAirports = new ArrayList<Airport>();
+		int highestIndex = -1;
+		int highestDistance = -1;
+		for (Airport a: airportList.getAirportList()) {
+			double distance = calculateDistance(latitude, longitude, a);
+
+		}
+		return nearestAirports;
+	}
+}

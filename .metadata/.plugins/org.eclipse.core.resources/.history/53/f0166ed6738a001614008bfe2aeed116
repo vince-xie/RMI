@@ -1,0 +1,64 @@
+package remote;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.Math.acos;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toRadians;
+import static java.lang.Math.toDegrees;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDataProto.AirportList;
+
+public class Airports extends UnicastRemoteObject implements AirportsInterface {
+
+	private static final long serialVersionUID = 1L;
+	private AirportList airportList;
+
+	public Airports(AirportList airportList) throws RemoteException {
+		this.airportList = airportList;
+	}
+
+	/**
+	 * Gets a list of the nearest airports to the specified longitude and latitude.
+	 * @param latitude
+	 * @param longitude
+	 * @return List of nearest airports
+	 */
+	public List<Airport> getNearestAirports(double latitude, double longitude) {
+		List<Airport> nearestAirports = new ArrayList<Airport>();
+		Airport closest = null;
+		double distance = 200000000;
+		for (Airport a: airportList.getAirportList()) {
+			if(calculateDistance(latitude, longitude, a) < distance) {
+				closest = a;
+				distance = calculateDistance(latitude, longitude, a);
+			}
+		}
+		if(closest != null) {
+		    nearestAirports.add(closest);
+		}
+		return nearestAirports;
+	}
+
+	/**
+	 * Calculates the distance to an airport from a certain longitude and latitude
+	 * @param latitude
+	 * @param longitude
+	 * @param airport
+	 * @return double distance in miles
+	 */
+	private double calculateDistance(double latitude, double longitude, Airport airport) {
+		double airportLat = toRadians(airport.getLat());
+		double airportLon = toRadians(airport.getLon());
+		double rlatitude = toRadians(latitude);
+		double rlongitude = toRadians(longitude);
+		return 1.1507794 * 60 * toDegrees(acos(
+				sin(rlatitude) * sin(airportLat) + cos(rlatitude) * cos(airportLat) * cos(airportLon - 
+						rlongitude)));
+	}
+}

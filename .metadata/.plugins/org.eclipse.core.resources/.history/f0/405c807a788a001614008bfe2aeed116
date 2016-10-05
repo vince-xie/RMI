@@ -1,0 +1,71 @@
+package server;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDataProto.AirportList;
+import remote.Airports;
+import remote.Places;
+
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
+public class AirportServer {
+
+	private static final int DEFAULT_PORT = 52363;
+	
+	/**
+	 * Retrieves airport list from file.
+	 * @param filename
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @return AirportList
+	 */
+	private static AirportList getAirportListFromFile(String filename) throws FileNotFoundException, IOException {
+		return AirportList.parseFrom(new FileInputStream(filename));
+	}
+
+    public static void main(String[] args) {
+    	int port = DEFAULT_PORT;
+    	if (args.length > 1) {
+    	    try {
+			    port = Integer.parseInt(args[0]);
+		    } catch (NumberFormatException e) {
+		    	System.err.println("usage: java AirportServer port");
+		    	System.exit(1);
+		    }
+    	}
+
+    	AirportList airportList;
+    	try {
+    	    airportList = getAirportListFromFile("airports-proto.bin");
+    	} catch (FileNotFoundException e) {
+    		System.out.println("Airport file not found.");
+    		return;
+        } catch (IOException e) {
+    		System.out.println("Error parsing airport list.");
+    		return;
+    	}
+
+    	String url = "//localhost:" + port + "/Airports";
+    	try {
+			Naming.rebind(url, new Airports(airportList));
+			System.out.println("Airport server is running on " + url + ".");
+		} catch (Exception e) {
+			System.out.println("Airport server startup failed.\n" + e.getMessage());
+		}
+
+    	Airports airports;
+		try {
+			airports = new Airports(airportList);
+	    	System.out.println(airports.getNearestAirports(40.352206, -74.657071));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

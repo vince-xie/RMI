@@ -17,3 +17,6 @@
 1475563275324	Rename type 'AirportFinderInterface'
 1475563293756	Rename type 'PlaceFinder'
 1475563306972	Rename type 'PlaceFinderInterface'
+1475613853289	Delete element
+1475625620123	Delete element
+1475626403671	Rename type 'AirportInfo'

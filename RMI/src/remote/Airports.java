@@ -5,9 +5,16 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.DistanceCalculator.calculateDistance;
+import static java.util.Comparator.comparing;
+
 import AirportData.AirportDataProto.Airport;
 import AirportData.AirportDataProto.AirportList;
+import AirportData.AirportDistance;
 
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
 public class Airports extends UnicastRemoteObject implements AirportsInterface {
 
 	private static final long serialVersionUID = 1L;
@@ -19,11 +26,38 @@ public class Airports extends UnicastRemoteObject implements AirportsInterface {
 
 	/**
 	 * Gets a list of the nearest airports to the specified longitude and latitude.
-	 * @param double longitude
-	 * @param double latitude
+	 * @param latitude
+	 * @param longitude
 	 * @return List of nearest airports
 	 */
-	public List<Airport> getNearestAirports(double longitude, double latitude) {
-		return new ArrayList<Airport>();
+	public List<AirportDistance> getNearestAirports(double latitude, double longitude) {
+		List<AirportDistance> nearestAirports = new ArrayList<AirportDistance>();
+		int highestIndex = 0;
+		double highestDistance = -1;
+		for (Airport a: airportList.getAirportList()) {
+			double distance = calculateDistance(latitude, longitude, a);
+            if (nearestAirports.size() < 5) {
+            	nearestAirports.add(new AirportDistance(a, distance));
+            	if (distance > highestDistance) {
+            		highestIndex = nearestAirports.size() - 1;
+            		highestDistance = distance;
+            	}
+            } else {
+            	if (distance < highestDistance) {
+            		nearestAirports.set(highestIndex, new AirportDistance(a, distance));
+            		highestIndex = 0;
+                	highestDistance = -1;
+                	for (int i = 0; i < nearestAirports.size(); i++) {
+                		double d = nearestAirports.get(i).getDistance();
+                		if (d > highestDistance) {
+                			highestIndex = i;
+                			highestDistance = d;
+                		}
+                	}
+            	} 
+            }
+        }
+		nearestAirports.sort(comparing(AirportDistance::getDistance));
+		return nearestAirports;
 	}
 }

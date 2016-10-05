@@ -6,6 +6,9 @@ import java.rmi.server.UnicastRemoteObject;
 import PlaceData.PlaceDataProto.Place;
 import PlaceData.PlaceDataProto.PlaceList;
 
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
 public class Places extends UnicastRemoteObject implements PlacesInterface {
 
 	private static final long serialVersionUID = 1L;

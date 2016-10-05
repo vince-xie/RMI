@@ -1,0 +1,15 @@
+package remote;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportInfo;
+
+/**
+ * @author Vincent Xie, Edmond Wu
+ */
+public interface AirportsInterface extends Remote {
+	public List<AirportInfo> getNearestAirports(double latitude, double longitude) throws RemoteException;
+}
