@@ -9,6 +9,9 @@ import java.util.*;
  */
 public class Client {
     public static void main(String[] args) {
+    	if (args.length == 0) {
+    		return;
+    	}
     	for (String s : args) {
     		System.out.println(s);
     	}
@@ -24,7 +27,6 @@ public class Client {
     	if (arguments.contains("-p")) {
     		port = Integer.parseInt(arguments.get(arguments.indexOf("-p") + 1));
     	}
-    	String url = "//" + server + ":" + port;
     	System.out.println("City: " + city + ", State: " + state + ", Server: " + server + ", Port: " + port);
     }
 }
