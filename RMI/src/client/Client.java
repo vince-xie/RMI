@@ -12,9 +12,6 @@ public class Client {
     	if (args.length == 0) {
     		return;
     	}
-    	for (String s : args) {
-    		System.out.println(s);
-    	}
     	int port = 1099;
     	String server = "localhost";
     	int argLength = args.length;
@@ -27,6 +24,8 @@ public class Client {
     	if (arguments.contains("-p")) {
     		port = Integer.parseInt(arguments.get(arguments.indexOf("-p") + 1));
     	}
+    	String airportUrl = "// " + server + ":" + port + "/Airports";
+    	String placeUrl = "// " + server + ":" + port + "/Places";
     	System.out.println("City: " + city + ", State: " + state + ", Server: " + server + ", Port: " + port);
     }
 }
