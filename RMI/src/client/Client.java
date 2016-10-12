@@ -3,11 +3,10 @@ package client;
 import java.rmi.*;
 import java.util.*;
 
-import AirportData.AirportDataProto.AirportList;
+import AirportData.AirportDataProto.*;
 import AirportData.AirportDistance;
 import PlaceData.PlaceDataProto.Place;
-import remote.Airports;
-import remote.Places; 
+import remote.*;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -41,6 +40,17 @@ public class Client {
 			else {
 				double latitude = place.getLat(), longitude = place.getLon();
 				System.out.println("Place: " + place.getName() + ", " + state + ": " + latitude + ", " + longitude);
+				try {
+					Airports airports = (Airports)Naming.lookup(airportUrl);
+					List<AirportDistance> closestAirports = airports.getNearestAirports(latitude, longitude);
+					for (AirportDistance a : closestAirports) {
+						Airport airport = a.getAirport();
+						int distance = (int)a.getDistance();
+						System.out.println("code=" + airport.getCode() + ", name=" + airport.getName() + ", state=" + airport.getState() + " distance: " + distance + " miles");
+					}
+				} catch (Exception e) {
+					System.out.println("Airports lookup failed");
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("Place lookup failed");

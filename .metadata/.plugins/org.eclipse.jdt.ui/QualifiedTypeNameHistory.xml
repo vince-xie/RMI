@@ -13,11 +13,11 @@
 <fullyQualifiedTypeName name="java.rmi.Naming"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
-<fullyQualifiedTypeName name="AirportData.AirportDataProto.Airport"/>
 <fullyQualifiedTypeName name="AirportData.AirportInfo"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="remote.Places"/>
 <fullyQualifiedTypeName name="PlaceData.PlaceDataProto.Place"/>
 <fullyQualifiedTypeName name="AirportData.AirportDistance"/>
 <fullyQualifiedTypeName name="AirportData.AirportDataProto.AirportList"/>
+<fullyQualifiedTypeName name="AirportData.AirportDataProto.Airport"/>
 </qualifiedTypeNameHistroy>

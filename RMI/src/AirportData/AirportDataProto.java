@@ -81,7 +81,7 @@ public final class AirportDataProto {
   /**
    * Protobuf type {@code airportdata.Airport}
    */
-  public  static final class Airport extends
+  public static final class Airport extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:airportdata.Airport)
       AirportOrBuilder {
