@@ -22,7 +22,7 @@ public class AirportServer {
 	 * @throws FileNotFoundException 
 	 * @return AirportList
 	 */
-	private static AirportList getAirportListFromFile(String filename) throws IOException {
+	public static AirportList getAirportListFromFile(String filename) throws IOException {
 		return AirportList.parseFrom(new FileInputStream(filename));
 	}
 
