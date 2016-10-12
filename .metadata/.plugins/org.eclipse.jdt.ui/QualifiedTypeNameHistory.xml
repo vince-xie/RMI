@@ -20,4 +20,5 @@
 <fullyQualifiedTypeName name="AirportData.AirportDistance"/>
 <fullyQualifiedTypeName name="AirportData.AirportDataProto.AirportList"/>
 <fullyQualifiedTypeName name="AirportData.AirportDataProto.Airport"/>
+<fullyQualifiedTypeName name="server.AirportServer"/>
 </qualifiedTypeNameHistroy>

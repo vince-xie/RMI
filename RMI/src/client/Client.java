@@ -7,6 +7,7 @@ import AirportData.AirportDataProto.*;
 import AirportData.AirportDistance;
 import PlaceData.PlaceDataProto.Place;
 import remote.*;
+import server.AirportServer;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -30,7 +31,20 @@ public class Client {
     	}
     	String airportUrl = "// " + server + ":" + port + "/Airports";
     	String placeUrl = "// " + server + ":" + port + "/Places";
-    	    	
+    	
+    	try {
+    		AirportList ap = AirportServer.getAirportListFromFile("airports-proto.bin");
+    		Airports airports = new Airports(ap);
+    		List<AirportDistance> closest = airports.getNearestAirports(40.35, -74.66);
+    		for (AirportDistance a : closest) {
+				Airport airport = a.getAirport();
+				int distance = (int)a.getDistance();
+				System.out.println("code=" + airport.getCode() + ", name=" + airport.getName() + ", state=" + airport.getState() + " distance: " + distance + " miles");
+			}
+    	} catch (Exception e) {
+    		System.out.println("Parsing error");
+    	}
+    	
     	try {
 			Places places = (Places)Naming.lookup(placeUrl);
 			Place place = places.findPlace(city, state);
