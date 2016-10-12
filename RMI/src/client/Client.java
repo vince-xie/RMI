@@ -1,8 +1,13 @@
 package client;
 
-import java.rmi.Naming;
-import java.io.*;
+import java.rmi.*;
 import java.util.*;
+
+import AirportData.AirportDataProto.AirportList;
+import AirportData.AirportDistance;
+import PlaceData.PlaceDataProto.Place;
+import remote.Airports;
+import remote.Places; 
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -26,6 +31,19 @@ public class Client {
     	}
     	String airportUrl = "// " + server + ":" + port + "/Airports";
     	String placeUrl = "// " + server + ":" + port + "/Places";
-    	System.out.println("City: " + city + ", State: " + state + ", Server: " + server + ", Port: " + port);
+    	    	
+    	try {
+			Places places = (Places)Naming.lookup(placeUrl);
+			Place place = places.findPlace(city, state);
+			if (place == null) {
+				System.out.println("Invalid place");
+			}
+			else {
+				double latitude = place.getLat(), longitude = place.getLon();
+				System.out.println("Place: " + place.getName() + ", " + state + ": " + latitude + ", " + longitude);
+			}
+		} catch (Exception e) {
+			System.out.println("Place lookup failed");
+		} 
     }
 }
