@@ -5,24 +5,30 @@ import java.util.*;
 
 import AirportData.AirportDataProto.*;
 import AirportData.AirportDistance;
-import PlaceData.PlaceDataProto.Place;
+import PlaceData.PlaceDataProto.*;
 import remote.*;
 import server.AirportServer;
+import server.PlaceServer;
 
 /**
  * @author Vincent Xie, Edmond Wu
  */
 public class Client {
     public static void main(String[] args) {
-    	if (args.length == 0) {
+    	if (args.length < 2) {
+    		System.out.println("Not enough arguments!");
     		return;
     	}
+    	List<String> arguments = Arrays.asList(args);
     	int port = 1099;
     	String server = "localhost";
     	int argLength = args.length;
     	String city = args[argLength - 2];
     	String state = args[argLength - 1];
-    	List<String> arguments = Arrays.asList(args);
+    	if (state.length() != 2) {
+    		System.out.println("Invalid state input");
+    		return;
+    	}
     	if (arguments.contains("-h")) {
     		server = arguments.get(arguments.indexOf("-h") + 1);
     	}
@@ -32,13 +38,18 @@ public class Client {
     	String airportUrl = "// " + server + ":" + port + "/Airports";
     	String placeUrl = "// " + server + ":" + port + "/Places";
     	
+    	//local testing purposes
     	try {
+    		PlaceList pl = PlaceServer.getPlaceListFromFile("places-proto.bin");
+    		Places places = new Places(pl);
     		AirportList ap = AirportServer.getAirportListFromFile("airports-proto.bin");
     		Airports airports = new Airports(ap);
-    		List<AirportDistance> closest = airports.getNearestAirports(40.35, -74.66);
+    		Place p = places.findPlace(city, state);
+    		List<AirportDistance> closest = airports.getNearestAirports(p.getLat(), p.getLon());
+    		System.out.println(p.getName() + ", " + p.getState() + ": " + p.getLat() + ", " + p.getLon());
     		for (AirportDistance a : closest) {
 				Airport airport = a.getAirport();
-				int distance = (int)a.getDistance();
+				int distance = (int)Math.round(a.getDistance());
 				System.out.println("code=" + airport.getCode() + ", name=" + airport.getName() + ", state=" + airport.getState() + " distance: " + distance + " miles");
 			}
     	} catch (Exception e) {
@@ -52,14 +63,13 @@ public class Client {
 				System.out.println("Invalid place");
 			}
 			else {
-				double latitude = place.getLat(), longitude = place.getLon();
-				System.out.println("Place: " + place.getName() + ", " + state + ": " + latitude + ", " + longitude);
 				try {
 					Airports airports = (Airports)Naming.lookup(airportUrl);
-					List<AirportDistance> closestAirports = airports.getNearestAirports(latitude, longitude);
+					List<AirportDistance> closestAirports = airports.getNearestAirports(place.getLat(), place.getLon());
+					System.out.println(place.getName() + ", " + place.getState() + ": " + place.getLat() + ", " + place.getLon());
 					for (AirportDistance a : closestAirports) {
 						Airport airport = a.getAirport();
-						int distance = (int)a.getDistance();
+						int distance = (int)Math.round(a.getDistance());
 						System.out.println("code=" + airport.getCode() + ", name=" + airport.getName() + ", state=" + airport.getState() + " distance: " + distance + " miles");
 					}
 				} catch (Exception e) {

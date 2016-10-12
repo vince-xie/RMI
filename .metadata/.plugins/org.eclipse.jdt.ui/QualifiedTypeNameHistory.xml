@@ -4,7 +4,6 @@
 <fullyQualifiedTypeName name="java.rmi.Remote"/>
 <fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
 <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
-<fullyQualifiedTypeName name="PlaceData.PlaceDataProto.PlaceList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="remote.PlaceFinder"/>
@@ -21,4 +20,6 @@
 <fullyQualifiedTypeName name="AirportData.AirportDataProto.AirportList"/>
 <fullyQualifiedTypeName name="AirportData.AirportDataProto.Airport"/>
 <fullyQualifiedTypeName name="server.AirportServer"/>
+<fullyQualifiedTypeName name="server.PlaceServer"/>
+<fullyQualifiedTypeName name="PlaceData.PlaceDataProto.PlaceList"/>
 </qualifiedTypeNameHistroy>

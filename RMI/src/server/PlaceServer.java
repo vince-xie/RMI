@@ -22,7 +22,7 @@ public class PlaceServer {
 	 * @throws FileNotFoundException 
 	 * @return PlaceList
 	 */
-	private static PlaceList getPlaceListFromFile(String filename) throws IOException {
+	public static PlaceList getPlaceListFromFile(String filename) throws IOException {
 		return PlaceList.parseFrom(new FileInputStream(filename));
 	}
 
