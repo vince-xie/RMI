@@ -11,20 +11,19 @@ import project.PlaceDataProto.*;
  */
 public class Client {
     public static void main(String[] args) {
-    	if (args.length < 2) {
-    		System.out.println("Not enough arguments!");
+    	if (args.length < 2 || args.length > 6) {
+    		System.out.println("Invalid amount of arguments!");
+    		return;
+    	}
+    	int port = 1099;
+    	String server = "localhost";
+    	String city = args[args.length - 2];
+    	String state = args[args.length - 1];
+    	if (state.length() != 2) {
+    		System.out.println("Invalid state input (use state 2-letter code)");
     		return;
     	}
     	List<String> arguments = Arrays.asList(args);
-    	int port = 1099;
-    	String server = "localhost";
-    	int argLength = args.length;
-    	String city = args[argLength - 2];
-    	String state = args[argLength - 1];
-    	if (state.length() != 2) {
-    		System.out.println("Invalid state input");
-    		return;
-    	}
     	if (arguments.contains("-h")) {
     		server = arguments.get(arguments.indexOf("-h") + 1);
     	}
@@ -52,10 +51,15 @@ public class Client {
     	} catch (Exception e) {
     		System.out.println("Parsing error");
     	}
+<<<<<<< HEAD:RMI/src/project/Client.java
     	*/
+=======
+    	
+    	//using the server
+>>>>>>> 00c579a7f5885ddda6e88e167c754849f0f3e9db:RMI/src/client/Client.java
     	try {
-			Places places = (Places)Naming.lookup(placeUrl);
-			Place place = places.findPlace(city, state);
+    		Places places = (Places)Naming.lookup(placeUrl);
+    		Place place = places.findPlace(city, state);
 			if (place == null) {
 				System.out.println("Invalid place");
 			}
