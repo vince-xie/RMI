@@ -3,8 +3,8 @@ package project;
 import java.rmi.*;
 import java.util.*;
 
-import project.AirportDataProto.*;
-import project.PlaceDataProto.*;
+import project.AirportDataProto.Airport;
+import project.PlaceDataProto.Place;
 
 /**
  * @author Vincent Xie, Edmond Wu
