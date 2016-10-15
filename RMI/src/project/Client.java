@@ -51,12 +51,8 @@ public class Client {
     	} catch (Exception e) {
     		System.out.println("Parsing error");
     	}
-<<<<<<< HEAD:RMI/src/project/Client.java
     	*/
-=======
-    	
     	//using the server
->>>>>>> 00c579a7f5885ddda6e88e167c754849f0f3e9db:RMI/src/client/Client.java
     	try {
     		Places places = (Places)Naming.lookup(placeUrl);
     		Place place = places.findPlace(city, state);
