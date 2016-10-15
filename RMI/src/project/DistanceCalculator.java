@@ -1,4 +1,4 @@
-package utils;
+package project;
 
 import static java.lang.Math.acos;
 import static java.lang.Math.cos;
@@ -6,7 +6,7 @@ import static java.lang.Math.sin;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
-import AirportData.AirportDataProto.Airport;
+import project.AirportDataProto.Airport;
 
 /**
  * @author Vincent Xie, Edmond Wu

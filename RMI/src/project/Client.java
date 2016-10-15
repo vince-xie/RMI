@@ -1,14 +1,10 @@
-package client;
+package project;
 
 import java.rmi.*;
 import java.util.*;
 
-import AirportData.AirportDataProto.*;
-import AirportData.AirportDistance;
-import PlaceData.PlaceDataProto.*;
-import remote.*;
-import server.AirportServer;
-import server.PlaceServer;
+import project.AirportDataProto.*;
+import project.PlaceDataProto.*;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -39,6 +35,7 @@ public class Client {
     	String placeUrl = "// " + server + ":" + port + "/Places";
     	
     	//local testing purposes
+    	/*
     	try {
     		PlaceList pl = PlaceServer.getPlaceListFromFile("places-proto.bin");
     		Places places = new Places(pl);
@@ -55,7 +52,7 @@ public class Client {
     	} catch (Exception e) {
     		System.out.println("Parsing error");
     	}
-    	
+    	*/
     	try {
 			Places places = (Places)Naming.lookup(placeUrl);
 			Place place = places.findPlace(city, state);

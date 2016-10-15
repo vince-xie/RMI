@@ -1,12 +1,11 @@
-package server;
+package project;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Naming;
 
-import AirportData.AirportDataProto.AirportList;
-import remote.Airports;
+import project.AirportDataProto.AirportList;
 
 /**
  * @author Vincent Xie, Edmond Wu

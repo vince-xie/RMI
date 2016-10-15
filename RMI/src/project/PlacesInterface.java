@@ -1,9 +1,9 @@
-package remote;
+package project;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import PlaceData.PlaceDataProto.Place;
+import project.PlaceDataProto.Place;
 
 /**
  * @author Vincent Xie, Edmond Wu
