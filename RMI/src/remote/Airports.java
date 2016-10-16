@@ -1,15 +1,16 @@
-package project;
+package remote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.AirportDataProto.Airport;
-import project.AirportDataProto.AirportList;
-
+import static utils.DistanceCalculator.calculateDistance;
 import static java.util.Comparator.comparing;
-import static project.DistanceCalculator.calculateDistance;
+
+import AirportData.AirportDataProto.Airport;
+import AirportData.AirportDataProto.AirportList;
+import AirportData.AirportDistance;
 
 /**
  * @author Vincent Xie, Edmond Wu

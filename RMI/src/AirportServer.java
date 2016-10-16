@@ -1,11 +1,10 @@
-package project;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Naming;
 
-import project.AirportDataProto.AirportList;
+import AirportData.AirportDataProto.AirportList;
+import remote.Airports;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -52,7 +51,7 @@ public class AirportServer {
 			Naming.rebind(url, new Airports(airportList));
 			System.out.println("Airport server is running on " + url + ".");
 		} catch (Exception e) {
-			System.out.println("Airport server startup failed.\n" + e.getMessage());
+			System.out.println("Airport server startup failed.");
 		}
 	}
 }

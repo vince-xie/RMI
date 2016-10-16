@@ -1,11 +1,12 @@
-package project;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.Naming;
 
-import project.PlaceDataProto.PlaceList;
+import PlaceData.PlaceDataProto.PlaceList;
+import remote.Places;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -52,7 +53,7 @@ public class PlaceServer {
 			Naming.rebind(url, new Places(placeList));
 			System.out.println("Place server is running on " + url + ".");
 		} catch (Exception e) {
-			System.out.println("Place server startup failed.\n" + e.getMessage());
+			System.out.println("Place server startup failed.\n");
 		}
 	}
 }

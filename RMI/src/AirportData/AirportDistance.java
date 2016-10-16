@@ -1,8 +1,8 @@
-package project;
+package AirportData;
 
 import java.io.Serializable;
 
-import project.AirportDataProto.Airport;
+import AirportData.AirportDataProto.Airport;
 
 /**
  * @author Vincent Xie, Edmond Wu

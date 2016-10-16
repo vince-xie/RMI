@@ -1,10 +1,12 @@
-package project;
+
 
 import java.rmi.*;
 import java.util.*;
 
-import project.AirportDataProto.Airport;
-import project.PlaceDataProto.Place;
+import AirportData.AirportDataProto.*;
+import AirportData.AirportDistance;
+import PlaceData.PlaceDataProto.*;
+import remote.*;
 
 /**
  * @author Vincent Xie, Edmond Wu
@@ -30,8 +32,8 @@ public class Client {
     	if (arguments.contains("-p")) {
     		port = Integer.parseInt(arguments.get(arguments.indexOf("-p") + 1));
     	}
-    	String airportUrl = "// " + server + ":" + port + "/Airports";
-    	String placeUrl = "// " + server + ":" + port + "/Places";
+    	String airportUrl = "//" + server + ":" + port + "/Airports";
+    	String placeUrl = "//" + server + ":" + port + "/Places";
     	
     	//local testing purposes
     	/*
@@ -50,18 +52,18 @@ public class Client {
 			}
     	} catch (Exception e) {
     		System.out.println("Parsing error");
-    	}
-    	*/
+    	} */
+    	
     	//using the server
     	try {
-    		Places places = (Places)Naming.lookup(placeUrl);
+    		PlacesInterface places = (PlacesInterface)Naming.lookup(placeUrl);
     		Place place = places.findPlace(city, state);
 			if (place == null) {
 				System.out.println("Invalid place");
 			}
 			else {
 				try {
-					Airports airports = (Airports)Naming.lookup(airportUrl);
+					AirportsInterface airports = (AirportsInterface)Naming.lookup(airportUrl);
 					List<AirportDistance> closestAirports = airports.getNearestAirports(place.getLat(), place.getLon());
 					System.out.println(place.getName() + ", " + place.getState() + ": " + place.getLat() + ", " + place.getLon());
 					for (AirportDistance a : closestAirports) {
@@ -74,7 +76,7 @@ public class Client {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Place lookup failed");
+			System.out.println("Place lookup failed " + e.getMessage());
 		} 
     }
 }
