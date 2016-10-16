@@ -76,7 +76,7 @@ public class Client {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Place lookup failed " + e.getMessage());
+			System.out.println("Place lookup failed.");
 		} 
     }
 }

@@ -53,7 +53,7 @@ public class PlaceServer {
 			Naming.rebind(url, new Places(placeList));
 			System.out.println("Place server is running on " + url + ".");
 		} catch (Exception e) {
-			System.out.println("Place server startup failed.\n");
+			System.out.println("Place server startup failed.");
 		}
 	}
 }
